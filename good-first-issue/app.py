@@ -11,7 +11,7 @@ def get_access_token():
     """Get the access token from the environment variable or from the .token file"""
     if os.environ.get("GITHUB_ACCESS_TOKEN"):
         return os.environ.get("GITHUB_ACCESS_TOKEN")
-    with open("../.token") as f:
+    with open("./.token") as f:
         return f.read()
 
 
@@ -80,4 +80,4 @@ def index():
 
 if __name__ == "__main__":
     logging.info("Starting the Flask app")
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
