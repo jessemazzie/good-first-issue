@@ -11,7 +11,7 @@ def get_access_token():
 
 
 def search_github_repositories(access_token):
-    github_search_query = "good-first-issue+is:issue+language:python"
+    github_search_query = "good-first-issue+is:issue+is:open"
     github_api_version = "2022-11-28"
     url = f"https://api.github.com/search/repositories?q={github_search_query}"
     headers = {
