@@ -15,6 +15,12 @@ def get_access_token():
         return f.read()
 
 
+def generate_language_list():
+    """Generate a list of programming languages for the search filter"""
+    # TODO: Implement this function
+    raise NotImplementedError
+
+
 def build_search_query(
     language: str = None, sort_by: str = "stars", order: str = "desc"
 ):
@@ -70,3 +76,8 @@ def index():
         logging.info(f"Repository url: {repo['html_url']}")
 
     return render_template("index.html", repositories=viable_repositories)
+
+
+if __name__ == "__main__":
+    logging.info("Starting the Flask app")
+    app.run(debug=True)
