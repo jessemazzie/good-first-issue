@@ -5,15 +5,29 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+
 def get_access_token():
     with open("../.token") as f:
         return f.read()
 
+def build_search_query(language: str = None, sort_by: str = "stars", order: str = "desc"):
+    query = "good-first-issue+is:issue+is:open"
+    if language:
+        query = f"{query}+language:{language}"
+    
+    if sort_by:
+        query = f"{query}&sort={sort_by}"
+
+    if order:
+        query = f"{query}&order={order}"
+
+    return query
+
 
 def search_github_repositories(access_token):
-    github_search_query = "good-first-issue+is:issue+is:open"
+    github_search_query = build_search_query()
     github_api_version = "2022-11-28"
-    url = f"https://api.github.com/search/repositories?q={github_search_query}&sort=stars&order=desc"
+    url = f"https://api.github.com/search/repositories?q={github_search_query}"
     headers = {
         "Authorization": f"Bearer {access_token}",
         "Accept": f"application/vnd.github.{github_api_version}+json",
@@ -41,12 +55,13 @@ print(access_token)
 
 viable_repositories = search_github_repositories(access_token)
 
+
 @app.route("/")
 def hello_world():
     return render_template("index.html", repositories=viable_repositories)
 
-# for repo in viable_repositories:
-#     logging.info(f"Repo name: {repo['name']}")
-#     logging.info(f"Issue count: {repo['open_issues_count']}")
-#     logging.info(f"Repository url: {repo['html_url']}")
 
+for repo in viable_repositories:
+    logging.info(f"Repo name: {repo['name']}")
+    logging.info(f"Issue count: {repo['open_issues_count']}")
+    logging.info(f"Repository url: {repo['html_url']}")
