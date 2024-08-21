@@ -6,7 +6,6 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#712cf9">
     </head> 
     <body class="text-white bg-dark"> 
         <div class="container">
@@ -19,9 +18,9 @@
                         <h6 class="card-subtitle mb-2 text-muted">{{ repo.full_name }}</h6>
                     </div>
                     <div class="card-body">
-                        <p class="card-text text-white"><small class="text-body-secondary"><i class="bi bi-star"></i> {{ repo.stargazers_count }}</small></p>
-                        <p class="card-text text-white"><small class="text-body-secondary"><i class="bi bi-eye"></i> {{ repo.watchers_count }}</small></p>
-                        <p class="card-text text-white"><small class="text-body-secondary">{{ repo.open_issues }} open issues</small></p>
+                        <p class="card-text text-white"><small class="text-body-secondary"><i class="bi bi-star"></i> {{ "{:,}".format(repo.stargazers_count) }}</small></p>
+                        <p class="card-text text-white"><small class="text-body-secondary"><i class="bi bi-eye"></i> {{ "{:,}".format(repo.watchers_count) }}</small></p>
+                        <p class="card-text text-white"><small class="text-body-secondary">{{ "{:,}".format(repo.open_issues) }} open issues</small></p>
                         <p class="card-text text-white">{{ repo.description }}</p>
                         <div class="row">
                             <div class="col">
