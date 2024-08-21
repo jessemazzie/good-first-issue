@@ -8,18 +8,21 @@ app = Flask(__name__)
 
 
 def get_access_token():
-    '''Get the access token from the environment variable or from the .token file'''
+    """Get the access token from the environment variable or from the .token file"""
     if os.environ.get("GITHUB_ACCESS_TOKEN"):
         return os.environ.get("GITHUB_ACCESS_TOKEN")
     with open("../.token") as f:
         return f.read()
 
-def build_search_query(language: str = None, sort_by: str = "stars", order: str = "desc"):
-    '''Build the search query for the GitHub API'''
+
+def build_search_query(
+    language: str = None, sort_by: str = "stars", order: str = "desc"
+):
+    """Build the search query for the GitHub API"""
     query = "good-first-issue+is:issue+is:open"
     if language:
         query = f"{query}+language:{language}"
-    
+
     if sort_by:
         query = f"{query}&sort={sort_by}"
 
@@ -30,7 +33,7 @@ def build_search_query(language: str = None, sort_by: str = "stars", order: str 
 
 
 def search_github_repositories(access_token):
-    '''Search for repositories with good first issues'''
+    """Search for repositories with good first issues"""
     github_search_query = build_search_query()
     github_api_version = "2022-11-28"
     url = f"https://api.github.com/search/repositories?q={github_search_query}"
@@ -56,6 +59,7 @@ logging.basicConfig(
 
 access_token = get_access_token()
 
+
 @app.route("/")
 def index():
     viable_repositories = search_github_repositories(access_token)
@@ -66,6 +70,3 @@ def index():
         logging.info(f"Repository url: {repo['html_url']}")
 
     return render_template("index.html", repositories=viable_repositories)
-
-
-
