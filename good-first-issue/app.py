@@ -1,10 +1,12 @@
 import urllib.request
 import json
 import logging
+from flask import Flask, render_template
 
+app = Flask(__name__)
 
 def get_access_token():
-    with open("./.token") as f:
+    with open("../.token") as f:
         return f.read()
 
 
@@ -39,8 +41,12 @@ print(access_token)
 
 viable_repositories = search_github_repositories(access_token)
 
-for repo in viable_repositories:
-    logging.info(f"Repo name: {repo['name']}")
-    logging.info(f"Issue count: {repo['open_issues_count']}")
-    logging.info(f"Repository url: {repo['html_url']}")
-    logging.info(f"Open issues url: {repo['issues_url']}")
+@app.route("/")
+def hello_world():
+    return render_template("index.html", repositories=viable_repositories)
+
+# for repo in viable_repositories:
+#     logging.info(f"Repo name: {repo['name']}")
+#     logging.info(f"Issue count: {repo['open_issues_count']}")
+#     logging.info(f"Repository url: {repo['html_url']}")
+

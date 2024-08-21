@@ -4,3 +4,4 @@ Scripts/
 pyvenv.cfg
 .token
 *.log
+__pycache__/
