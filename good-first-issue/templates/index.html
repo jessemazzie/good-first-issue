@@ -4,18 +4,26 @@
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head> 
-    <body class="text-white bg-dark"> 
+    <body class="text-white"> 
+        <div class="container">
+            <div class="row row-cols-2">
+                <div class="col">
+                    <h1 class="display-3 headline-text">Good First Issue</h1>
+                    <p class="lead subheadline-text">A list of repositories with good first issues.</p>
+                </div>
+            </div>
         <div class="container">
         <div class="row row-cols-4">
         {% for repo in  repositories%} 
             <div class="col">
                 <div class="card bg-dark mb-3">
                     <div class="card-header">
-                        <h5 class="card-title">{{ repo.name }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ repo.full_name }}</h6>
+                        <h5 class="card-title headline-text">{{ repo.name }}</h5>
+                        <h6 class="card-subtitle mb-2 subheadline-text">{{ repo.full_name }}</h6>
                     </div>
                     <div class="card-body">
                         <p class="card-text text-white"><small class="text-body-secondary"><i class="bi bi-star"></i> {{ "{:,}".format(repo.stargazers_count) }}</small></p>

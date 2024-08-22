@@ -1,0 +1,23 @@
+body {
+    background-color: #e3f6f5 !important;
+}
+
+.card-header {
+    background-color: #fffffe !important;
+}
+
+.card-body {
+    background-color: #fffffe !important;
+}
+
+.card-text {
+    color: #2d334a !important;
+}
+
+.headline-text {
+    color: #272343 !important;
+}
+
+.subheadline-text {
+    color: #2d334a !important;
+}

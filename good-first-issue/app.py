@@ -9,10 +9,14 @@ app = Flask(__name__)
 
 def get_access_token():
     """Get the access token from the environment variable or from the .token file"""
-    if os.environ.get("GITHUB_ACCESS_TOKEN"):
-        return os.environ.get("GITHUB_ACCESS_TOKEN")
-    with open("./.token") as f:
-        return f.read()
+    try:
+        if os.environ.get("GITHUB_ACCESS_TOKEN"):
+            return os.environ.get("GITHUB_ACCESS_TOKEN")
+        with open("./.token") as f:
+            return f.read()
+    except FileNotFoundError:
+        logging.error("Token file not found")
+        raise FileNotFoundError("Token file not found")
 
 
 def generate_language_list():
@@ -38,9 +42,9 @@ def build_search_query(
     return query
 
 
-def search_github_repositories(access_token):
+def search_github_repositories(access_token, language=None):
     """Search for repositories with good first issues"""
-    github_search_query = build_search_query()
+    github_search_query = build_search_query(language)
     github_api_version = "2022-11-28"
     url = f"https://api.github.com/search/repositories?q={github_search_query}"
     headers = {
@@ -67,15 +71,16 @@ access_token = get_access_token()
 
 
 @app.route("/")
-def index():
-    viable_repositories = search_github_repositories(access_token)
+@app.route("/<language>")
+def index(language: str = None):
+    viable_repositories = search_github_repositories(access_token, language)
 
     for repo in viable_repositories:
         logging.info(f"Repo name: {repo['name']}")
         logging.info(f"Issue count: {repo['open_issues_count']}")
         logging.info(f"Repository url: {repo['html_url']}")
 
-    return render_template("index.html", repositories=viable_repositories)
+    return render_template("index.html", repositories=viable_repositories, language=language)
 
 
 if __name__ == "__main__":
