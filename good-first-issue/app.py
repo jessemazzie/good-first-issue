@@ -2,7 +2,7 @@ import urllib.request
 import json
 import os
 import logging
-from flask import Flask, render_template
+from flask import Flask, request, send_from_directory, render_template
 
 app = Flask(__name__)
 
@@ -80,7 +80,14 @@ def index(language: str = None):
         logging.info(f"Issue count: {repo['open_issues_count']}")
         logging.info(f"Repository url: {repo['html_url']}")
 
-    return render_template("index.html", repositories=viable_repositories, language=language)
+    return render_template(
+        "index.html", repositories=viable_repositories, language=language
+    )
+
+
+@app.route("/ads.txt")
+def ads():
+    return send_from_directory("static", request.path[1:])
 
 
 if __name__ == "__main__":
