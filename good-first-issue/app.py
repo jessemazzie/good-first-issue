@@ -85,11 +85,6 @@ def index(language: str = None):
     )
 
 
-@app.route("/ads.txt")
-def ads():
-    return send_from_directory("static", request.path[1:])
-
-
 if __name__ == "__main__":
     logging.info("Starting the Flask app")
     app.run(debug=True, host="0.0.0.0")
