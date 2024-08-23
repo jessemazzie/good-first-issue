@@ -52,7 +52,7 @@
                             <p class="card-text"><small class="text-body-secondary"><i class="bi bi-star"></i> {{ "{:,}".format(repo.stargazers_count) }}</small></p>
                             <p class="card-text"><small class="text-body-secondary"><i class="bi bi-eye"></i> {{ "{:,}".format(repo.watchers_count) }}</small></p>
                             <p class="card-text"><small class="text-body-secondary">{{ "{:,}".format(repo.open_issues) }} open issues</small></p>
-                            <p class="card-text text-truncate">{{ repo.description }}</p>
+                            <p class="card-text">{{ repo.description }}</p>
                             <div class="row">
                                 <div class="col">
                                     <p class="card-text"><a href="{{ repo.html_url }}">GitHub Link</a> | {{ repo.language }}</p>
