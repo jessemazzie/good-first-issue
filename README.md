@@ -7,7 +7,7 @@ A Flask web app for finding open source projects to contribute to.
 pip3 install -r requirements.txt
 make run-dev
 
-#  deploy app to container using gunicorn
+# deploy app to container using gunicorn
 make build
 make run-container
 

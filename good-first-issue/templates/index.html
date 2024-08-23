@@ -16,30 +16,53 @@
                     <p class="lead subheadline-text">A list of repositories with good first issues.</p>
                 </div>
             </div>
+            <div class="row">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">any language</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/python">Python</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/go">Go</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/c">C</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="rust">Rust</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="java">Java</a>
+                    </li>
+                    </ul>
+            </div>
+        </div>
         <div class="container">
-        <div class="row row-cols-4">
-        {% for repo in  repositories%} 
-            <div class="col">
-                <div class="card bg-dark mb-3">
-                    <div class="card-header">
-                        <h5 class="card-title headline-text">{{ repo.name }}</h5>
-                        <h6 class="card-subtitle mb-2 subheadline-text">{{ repo.full_name }}</h6>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text text-white"><small class="text-body-secondary"><i class="bi bi-star"></i> {{ "{:,}".format(repo.stargazers_count) }}</small></p>
-                        <p class="card-text text-white"><small class="text-body-secondary"><i class="bi bi-eye"></i> {{ "{:,}".format(repo.watchers_count) }}</small></p>
-                        <p class="card-text text-white"><small class="text-body-secondary">{{ "{:,}".format(repo.open_issues) }} open issues</small></p>
-                        <p class="card-text text-white">{{ repo.description }}</p>
-                        <div class="row">
-                            <div class="col">
-                                <p class="text-white"><a href="{{ repo.html_url }}">GitHub Link</a> | {{ repo.language }}</p>
+            <div class="row row-cols-4">
+            {% for repo in  repositories%} 
+                <div class="col">
+                    <div class="card bg-dark mb-3">
+                        <div class="card-header">
+                            <h5 class="card-title headline-text">{{ repo.name }}</h5>
+                            <h6 class="card-subtitle mb-2 subheadline-text">{{ repo.full_name }}</h6>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><small class="text-body-secondary"><i class="bi bi-star"></i> {{ "{:,}".format(repo.stargazers_count) }}</small></p>
+                            <p class="card-text"><small class="text-body-secondary"><i class="bi bi-eye"></i> {{ "{:,}".format(repo.watchers_count) }}</small></p>
+                            <p class="card-text"><small class="text-body-secondary">{{ "{:,}".format(repo.open_issues) }} open issues</small></p>
+                            <p class="card-text text-truncate">{{ repo.description }}</p>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="card-text"><a href="{{ repo.html_url }}">GitHub Link</a> | {{ repo.language }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            {% endfor %}
             </div>
-        {% endfor %}
-        </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body> 
