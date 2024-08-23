@@ -5,7 +5,7 @@ WORKDIR /work
 EXPOSE 8000
 
 ADD good-first-issue /work/
-ADD .token /work/
+# ADD .token /work/
 ADD requirements.txt /work/
 RUN chmod +x /work/
 
