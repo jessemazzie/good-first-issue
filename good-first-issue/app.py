@@ -71,7 +71,7 @@ access_token = get_access_token()
 
 
 @app.route("/")
-@app.route("/<language>")
+@app.route("/language/<language>")
 def index(language: str = None):
     viable_repositories = search_github_repositories(access_token, language)
 
