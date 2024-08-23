@@ -84,13 +84,16 @@ def index(language: str = None):
         "index.html", repositories=viable_repositories, language=language
     )
 
+
 @app.route("/favicon.ico")
 def favicon():
     return app.send_static_file("favicon.ico")
 
+
 @app.route("/robots.txt")
 def robots():
     return app.send_static_file("robots.txt")
+
 
 if __name__ == "__main__":
     logging.info("Starting the Flask app")
