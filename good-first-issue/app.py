@@ -67,12 +67,12 @@ logging.basicConfig(
     handlers=[logging.FileHandler("gfi.log", mode="a"), logging.StreamHandler()],
 )
 
-access_token = get_access_token()
-
 
 @app.route("/")
 @app.route("/language/<language>")
 def index(language: str = None):
+    """Render the index.html page and language filter"""
+    access_token = get_access_token()
     viable_repositories = search_github_repositories(access_token, language)
 
     for repo in viable_repositories:
@@ -87,11 +87,13 @@ def index(language: str = None):
 
 @app.route("/favicon.ico")
 def favicon():
+    """Return the favicon.ico file"""
     return app.send_static_file("favicon.ico")
 
 
 @app.route("/robots.txt")
 def robots():
+    """Return the robots.txt file"""
     return app.send_static_file("robots.txt")
 
 
